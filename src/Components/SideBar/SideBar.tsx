@@ -1,6 +1,7 @@
 import  { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addManinShowToTrue, addPreviousDataToMain } from '../../Redux/chatbotSlice';
+import { addManinShowToTrue, addPreviousDataToMain, handleSideBar } from '../../Redux/chatbotSlice';
 import { AppDispatch, RootState } from '../../Redux/store';
 import Buttons from '../Buttons/Buttons';
 
@@ -8,16 +9,21 @@ import Buttons from '../Buttons/Buttons';
 
 
 type sideBarTy = {
-    sideBar: boolean,
-    handileSideBarShow: () => void;
+  
+    
     handileDeleteHistory:(params:string|number)=>void
   
 }
-const SideBar  = ({ sideBar, handileSideBarShow,handileDeleteHistory }: sideBarTy) =>{
+const SideBar  = React.memo(({  handileDeleteHistory }: sideBarTy) =>{
     const [clickValue,setClickValue] =useState<number>(0)
-    const { chatHistory } = useSelector((state: RootState) => state.chatRes);
 
+    const { chatHistory,sideBar } = useSelector((state: RootState) => state.chatRes);
+    console.log(sideBar);
     
+
+    const toggleSideBar =()=>{
+        dispatch(handleSideBar())
+    }
  
     
     const dispatch = useDispatch<AppDispatch>();
@@ -35,17 +41,19 @@ const SideBar  = ({ sideBar, handileSideBarShow,handileDeleteHistory }: sideBarT
         setClickValue(id)
       };
     
+console.log("rerendering");
 
    
     return (
-        <div className={`h-[100vh] w-[200px] sidebarBg py-6 px-3.5 flex-col overflow-y-auto justify-center transform transition-transform duration-300 ease-in-out ${sideBar ? '-translate-x-full absolute z-10' : ' translate-x-0 absolute z-10'} md:block`}>
-            <div>
-                <button onClick={handileSideBarShow} className='text-white'>
+        <div className={`h-[100vh] w-[200px] sidebarBg py-6 px-3.5 flex-col overflow-y-auto justify-center transform transition-transform duration-300 ease-in-out ${sideBar ? '-translate-x-full  absolute z-10' : ' translate-x-0 absolute z-10'} md:block`}>
+            <div className=''>
+                <button onClick={toggleSideBar} className='text-white'>
                  
                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                         </svg>
                 </button>
+              
             </div>
 
             <div className="mt-4 mb-4 cursor-pointer text-white">
@@ -75,7 +83,7 @@ const SideBar  = ({ sideBar, handileSideBarShow,handileDeleteHistory }: sideBarT
             <div>
                 <ul>
                     {
-                       chatHistory != undefined && chatHistory.map((item) => (
+                       chatHistory  && chatHistory.map((item) => (
                             
                             <li key={item?._id} className={clickValue==item._id? 'bg-zinc-900 rounded-md mb-3 mt-2 text-white hover:bg-zinc-900 p-3 hover:rounded-md cursor-pointer flex justify-between':' text-white hover:bg-zinc-900 p-3 hover:rounded-md cursor-pointer flex justify-between'}>
                                 <span onClick={()=>handilPreviousToMail(item._id)}>  {item?.userMessage}</span>
@@ -100,6 +108,6 @@ const SideBar  = ({ sideBar, handileSideBarShow,handileDeleteHistory }: sideBarT
 
     
     );
-}
+})
 
 export default SideBar;

@@ -15,6 +15,8 @@ type ChatApiState = {
   chatInput:string,
   mainShow:boolean
   chatHistory:aiChatHistoryts[]
+  sideBar:boolean
+  input:string
 };
 
 const initialState: ChatApiState = {
@@ -23,7 +25,9 @@ const initialState: ChatApiState = {
   error: null,
   chatInput:"",
   mainShow:true,
-  chatHistory:[]
+  chatHistory:[],
+  sideBar:true,
+  input:""
 
 };
 
@@ -40,6 +44,7 @@ const chatbotSlice = createSlice({
       state.data = action.payload;
       state.error = null;
       state.mainShow=false
+      state.input =""
 
     },
     fetchMenusFailure: (state, action: PayloadAction<string>) => {
@@ -61,20 +66,27 @@ const chatbotSlice = createSlice({
 
 
     getChatHistory: (state, action: PayloadAction<aiChatHistoryts[]>) => {
-        state.chatHistory = action.payload; // Replace history with new data
+        state.chatHistory = action.payload; 
       },
       addPreviousDataToMain: (state, action: PayloadAction<number>) => {
-        const selectedChat = state.chatHistory.find((val) => val._id === action.payload); // Find the chat item
+        const selectedChat = state.chatHistory.find((val) => val._id === action.payload); 
         if (selectedChat) {
           state.chatInput = selectedChat.userMessage;
           state.data = { response: selectedChat.aiResponse }; 
           state.mainShow = false
         }
+      },
+      handleSideBar:(state)=>{
+        state.sideBar =  !state.sideBar
+      },
+      handleInputs:(state,action: PayloadAction<string>)=>{
+        state.input = action.payload
+
       }
  
 
   },
 });
 
-export const { fetchMenusStart, fetchMenusSuccess, fetchMenusFailure,addInput,addManinShow,addManinShowToTrue,getChatHistory,addPreviousDataToMain} = chatbotSlice.actions;
+export const { fetchMenusStart, fetchMenusSuccess, fetchMenusFailure,addInput,addManinShow,addManinShowToTrue,getChatHistory,addPreviousDataToMain,handleSideBar,handleInputs} = chatbotSlice.actions;
 export default chatbotSlice.reducer;
