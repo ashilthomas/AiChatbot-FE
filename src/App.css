@@ -1,0 +1,29 @@
+.mainBackground{
+  background-image: radial-gradient(145.05% 100% at 50% 0, #1d2b41 0, #020509 57.38%, #0f1a29 88.16%);
+}
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #4d78ef;
+  --main-text-color: #7ed4fd;
+
+}
+.main-text{
+  color: var(--main-text-color);
+}
+.bgc{
+ 
+
+  background-image: radial-gradient(145.05% 100% at 50% 0, #1d2b41 0, #020509 57.38%, #0f1a29 88.16%);
+}
+.sidebarBg{
+  /* background-color: rgb(70, 84, 103); */
+  /* background-image: linear-gradient(to bottom, #465367, #3d3d4c, #2f2932, #1c181b, #000000); */
+  background-image: radial-gradient(145.05% 100% at 50% 0, #3a3f88 0%, #4b5a7c 57.38%, #141a2f 88.16%);
+
+}
+
+@media (max-width: 560px) {
+  .side-bar{
+    display: none;
+  }
+}
