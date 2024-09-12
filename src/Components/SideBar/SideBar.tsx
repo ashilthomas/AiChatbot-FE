@@ -9,16 +9,17 @@ import Buttons from '../Buttons/Buttons';
 
 
 type sideBarTy = {
-  
     
     handileDeleteHistory:(params:string|number)=>void
   
 }
-const SideBar  = React.memo(({  handileDeleteHistory }: sideBarTy) =>{
+
+const SideBar  = React.memo(({ handileDeleteHistory  }: sideBarTy) =>{
     const [clickValue,setClickValue] =useState<number>(0)
 
     const { chatHistory,sideBar } = useSelector((state: RootState) => state.chatRes);
-    console.log(sideBar);
+  
+   
     
 
     const toggleSideBar =()=>{
@@ -41,7 +42,7 @@ const SideBar  = React.memo(({  handileDeleteHistory }: sideBarTy) =>{
         setClickValue(id)
       };
     
-console.log("rerendering");
+
 
    
     return (

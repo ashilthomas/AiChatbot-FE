@@ -156,7 +156,7 @@
 
 // export default Main
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Options from '../options/Options';
 import Buttons from '../Buttons/Buttons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -167,13 +167,15 @@ import { handleInputs, handleSideBar } from '../../Redux/chatbotSlice';
 
 
 type mainPropes = {
- 
   handilFetchApi:()=>void
   handleKeyDown: (e:React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
 function Main({   handleKeyDown,handilFetchApi }: mainPropes) {
   const { data, loading, chatInput, mainShow ,sideBar, input} = useSelector((state: RootState) => state.chatRes);
+
+ 
+  
  
   
   const dispatch = useDispatch<AppDispatch>();
@@ -295,4 +297,6 @@ function Main({   handleKeyDown,handilFetchApi }: mainPropes) {
   );
 }
 
-export default Main;
+
+
+export default React.memo(Main) ;

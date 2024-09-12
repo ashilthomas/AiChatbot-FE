@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import Main from './Components/Main/Main'
 import SideBar from './Components/SideBar/SideBar'
 import './App.css'
@@ -8,7 +8,9 @@ import { AppDispatch, RootState } from './Redux/store'
 import { addInput, addManinShow, fetchMenusFailure, fetchMenusStart, fetchMenusSuccess, getChatHistory } from './Redux/chatbotSlice'
 
 function App() {
+
   const {  input} = useSelector((state: RootState) => state.chatRes);
+
   const dispatch = useDispatch<AppDispatch>();
   const handilFetchApi = async () => {
     try {
@@ -24,50 +26,40 @@ function App() {
     }
 
   }
+ 
 
-  const fetchChatHistory = async () => {
+  const fetchChatHistory = useCallback(async () => {
     try {
       const res = await axios.get("http://localhost:3001/api/v1/chat/history");
       dispatch(getChatHistory(res.data.history));
-
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [dispatch]);
 
 
   useEffect(() => {
     fetchChatHistory();
   }, []);
-  const handileDeleteHistory = async (id: string | number) => {
-
+ 
+  const handileDeleteHistory = useCallback(async (id: string | number) => {
     try {
-      const res = await axios.delete(`http://localhost:3001/api/v1/chat/delete/${id}`)
-      fetchChatHistory();
-
+      const res = await axios.delete(`http://localhost:3001/api/v1/chat/delete/${id}`);
       if (res.data.success) {
-        console.log(res.data.message);
-
         fetchChatHistory();
-
-
-
       } else {
         console.log('Failed to delete chat');
-
       }
     } catch (error) {
       console.log(error);
-
-
     }
-  }
+  }, [fetchChatHistory]);
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handilFetchApi();
     }
-  };
+  }, [handilFetchApi]);
 
 
   return (
