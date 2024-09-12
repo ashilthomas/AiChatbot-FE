@@ -16,7 +16,7 @@ function App() {
     try {
       dispatch(fetchMenusStart());
       dispatch(addInput(input))
-      const res = await axios.post("http://localhost:3001/api/v1/chat/apireq", { message: input });
+      const res = await axios.post("https://aichatbot-be.onrender.com/api/v1/chat/apireq", { message: input });
       dispatch(fetchMenusSuccess(res.data));
       dispatch(addManinShow())
       fetchChatHistory();
@@ -30,7 +30,7 @@ function App() {
 
   const fetchChatHistory = useCallback(async () => {
     try {
-      const res = await axios.get("http://localhost:3001/api/v1/chat/history");
+      const res = await axios.get("https://aichatbot-be.onrender.com/api/v1/chat/history");
       dispatch(getChatHistory(res.data.history));
     } catch (error) {
       console.log(error);
@@ -44,7 +44,7 @@ function App() {
  
   const handileDeleteHistory = useCallback(async (id: string | number) => {
     try {
-      const res = await axios.delete(`http://localhost:3001/api/v1/chat/delete/${id}`);
+      const res = await axios.delete(`https://aichatbot-be.onrender.com/api/v1/chat/delete/${id}`);
       if (res.data.success) {
         fetchChatHistory();
       } else {
