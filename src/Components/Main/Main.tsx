@@ -239,61 +239,118 @@ function Main({ handleKeyDown, handilFetchApi }: mainPropes) {
   }, [data?.response]);
 
   return (
-    <div className='p-6 h-screen relative w-full bg-[var(--color-dark-bg)]'>
-      <div className='flex justify-between '>
-        <div className='flex items-center gap-3'>
-          {
-            sideBar || <Buttons onClick={() => dispatch(handleSideBar())} className=' text-white'>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-              </svg>
-            </Buttons> 
-            
-          }
-
-
-          <h2 className='main-text font-semibold text-xl '>Ai ChatBot</h2>
-
-        </div>
-        <button>
-          <Options />
-        </button>
-      </div>
-      <div className='w-full max-w-[900px] m-auto mt-4'>
-        {loading ? (
-          <Loading />
-        ) : (
-          <>
-            {mainShow ? (
-              <p className="relative font-sans uppercase text-6xl tracking-widest overflow-hidden bg-linear-to-r from-black via-white to-black bg-no-repeat bg-80 animate-shine bg-clip-text text-transparent">
-                A chatbot awaits, your new trusted friend
-              </p>
-            ) : (
-              <div>
-                <span className='flex items-center gap-3 mb-6 bg-slate-100 p-3 rounded-xs'>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-7">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                  </svg>
-                  <h1>{chatInput}</h1>
-                </span>
-                <div className='h-[470px] overflow-y-auto no-scrollbar'>
-                  {/* Render animated HTML content */}
-                  <p className='text-white' dangerouslySetInnerHTML={{ __html: animatedHTML }}></p>
-                </div>
-              </div>
-            )}
-          </>
-        )}
-      </div>
-      <div className='flex items-center absolute bottom-0 mb-10 left-0 right-0 w-full max-w-[900px] bg-white m-auto rounded-md'>
-        <input className='w-[95%] rounded-md p-3 outline-hidden' type="text" placeholder='Enter your prompt.......' value={input} onChange={(e) => dispatch(handleInputs(e.target.value))} onKeyDown={handleKeyDown} />
-        <button onClick={handilFetchApi}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+<div className="p-6 h-screen relative w-full bg-[var(--color-dark-bg)] flex flex-col">
+  {/* Header */}
+  <div className="flex justify-between items-center">
+    <div className="flex items-center gap-3">
+      {!sideBar && (
+        <Buttons
+          onClick={() => dispatch(handleSideBar())}
+          className="text-[var(--color-dark-text)] hover:text-[var(--color-dark-accent)] transition-colors"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-7 h-7"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
           </svg>
-        </button>
-      </div>
+        </Buttons>
+      )}
     </div>
+
+    <button className="text-[var(--color-dark-text)] hover:text-[var(--color-dark-accent)] transition-colors">
+      <Options />
+    </button>
+  </div>
+
+  {/* Chat Section */}
+  <div className="flex-1 w-full max-w-[900px] mx-auto mt-6">
+    {loading ? (
+      <Loading />
+    ) : mainShow ? (
+   <div className="flex mt-10 justify-center h-full text-center">
+  <h1 className="font-extrabold text-5xl sm:text-6xl md:text-7xl tracking-tight leading-tight">
+    <span className="block text-[var(--color-dark-text)]">
+      Your Personal
+    </span>
+    <span className="block bg-gradient-to-r from-[var(--color-dark-accent)] to-[var(--color-dark-accent2)] bg-clip-text text-transparent">
+      AI ChatBot
+    </span>
+  </h1>
+</div>
+    ) : (
+      <div className="w-full">
+        {/* User Query Bubble */}
+        <span className="flex items-center gap-3 mb-6 bg-[var(--input-dark-bg)] border border-[var(--input-dark-border)] p-3 rounded-lg shadow-sm">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-7 h-7 text-[var(--color-dark-accent)]"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
+          </svg>
+          <h1 className="text-[var(--color-dark-text)]">{chatInput}</h1>
+        </span>
+
+        {/* Bot Response */}
+        <div className="h-[470px] overflow-y-auto no-scrollbar px-1">
+          <p
+            className="text-[var(--color-dark-text)] leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: animatedHTML }}
+          ></p>
+        </div>
+      </div>
+    )}
+  </div>
+
+  {/* Input Box */}
+  <div className="absolute bottom-8 left-0 right-0 mx-auto w-full max-w-[600px] flex items-center border border-[var(--input-dark-border)] bg-[var(--input-dark-bg)] rounded-full shadow-sm focus-within:ring-2 focus-within:ring-[var(--input-dark-border-focus)] transition">
+    <input
+      type="text"
+      placeholder="Enter your prompt..."
+      value={input}
+      onChange={(e) => dispatch(handleInputs(e.target.value))}
+      onKeyDown={handleKeyDown}
+      className="flex-1 bg-transparent rounded-full px-4 py-3 text-[var(--input-dark-text)] placeholder-[var(--input-dark-placeholder)] focus:outline-none text-sm"
+    />
+    <button
+      onClick={handilFetchApi}
+      className="text-white rounded-full p-2 m-2 bg-[var(--color-dark-accent2)] hover:opacity-90 transition"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="w-6 h-6"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+
+
   );
 }
 

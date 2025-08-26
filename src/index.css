@@ -1,9 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import 'tailwindcss';
+@layer base {
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  
+  }
+
+  html {
+  scroll-behavior: smooth;
 
 
+}
+}
 body{
   font-family: 'Roboto', sans-serif;
+   overflow-y: hidden;
 }
 @theme {
   --color-dark-bg: #0E0E0F;
@@ -13,6 +26,12 @@ body{
   --color-dark-text: #E5E5E5;
   --color-dark-muted: #9CA3AF;
   --color-dark-border: #1F2937;
+ --input-dark-bg: #1A1D21;
+    --input-dark-border: #2A2F35;
+      --input-dark-border-focus: #00F5D4;
+  --input-dark-text: #E5E5E5;
+  --input-dark-placeholder: #6B7280;
+  --input-dark-error: #FF4D6D;
 
   --color-light-bg: #F9FAFB;
   --color-light-accent: #2563EB;
@@ -20,6 +39,13 @@ body{
   --color-light-highlight: #F87171;
   --color-light-text: #1F2937;
   --color-light-muted: #6B7280;
+  --color-light-border: #E5E7EB;
+  --input-light-bg: #FFFFFF;
+  --input-light-border: #D1D5DB;
+  --input-light-border-focus: #2563EB;
+  --input-light-text: #1F2937;
+  --input-light-placeholder: #9CA3AF;
+  --input-light-error: #DC2626;
 
   --color-gradient-cyanblue: #00F5D4;
   --color-gradient-cyanblue2: #3A86FF;

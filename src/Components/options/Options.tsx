@@ -1,5 +1,6 @@
 
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { User } from 'lucide-react'
 
 
 function Options() {
@@ -9,11 +10,8 @@ function Options() {
 
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <MenuButton className=" bgc inline-flex w-full justify-center gap-x-1.5 rounded-full bg-white p-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-white">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-            </svg>
-
+          <MenuButton className=" bgc inline-flex w-full justify-center gap-x-1.5 rounded-full bg-[var(--color-dark-accent2)] p-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+          <User />
 
           </MenuButton>
         </div>
