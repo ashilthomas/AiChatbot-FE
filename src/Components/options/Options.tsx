@@ -10,7 +10,7 @@ function Options() {
 
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <MenuButton className=" bgc inline-flex w-full justify-center gap-x-1.5 rounded-full bg-[var(--color-dark-accent2)] p-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+          <MenuButton className=" bgc inline-flex w-full justify-center gap-x-1.5 rounded-full bg-[var(--color-dark-accent2)] p-2 text-sm font-semibold text-[var(--color-dark-text)]  shadow-xs ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
           <User />
 
           </MenuButton>
