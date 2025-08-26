@@ -16,7 +16,7 @@
 //     setInput: React.Dispatch<React.SetStateAction<string>>
 //     input: string
 //     handilFetchApi: () => void
-    
+
 
 
 
@@ -38,7 +38,7 @@
 
 
 
-   
+
 //     const keyword: string = ';'; 
 
 //     const convertMarkdownToHTML = async (markdownContent: string | Promise<string>) => {
@@ -57,7 +57,7 @@
 //             `<span style="color: blue; font-weight: bold;">${keyword}</span>`
 //         );
 
-  
+
 //         const contentWithMargin = styledContent.replace(/\n/g, `<br/><span style="display: block; margin-left: 20px;"></span>`);
 
 //         return marked(contentWithMargin);
@@ -73,7 +73,7 @@
 //         }
 //     }, [data?.response]);
 
-  
+
 //     return (
 //         <div className='p-6 h-[100vh] relative w-full mainBackground'>
 
@@ -86,7 +86,7 @@
 //                         </svg></Buttons>
 //                     }
 
-                 
+
 //                     <h2 className='main-text font-semibold text-xl'>Ai ChatBot</h2>
 //                 </div>
 //                 <button>
@@ -108,7 +108,7 @@
 //                                 </p>
 //                                     :<>
 
-                                     
+
 // <div>
 //                                         <span className='flex items-center gap-3 mb-6 bg-slate-100 p-3 rounded-sm'>
 //                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-7">
@@ -120,7 +120,7 @@
 //                                         </span>
 //                                         <div className='h-[500px] overflow-y-auto' >
 
-                                            
+
 
 
 //                                             <p className='text-white' dangerouslySetInnerHTML={{ __html: resolvedHTML }}></p>
@@ -131,10 +131,10 @@
 
 //                                     </div>
 //                                     </>
-                                    
-                          
-                                
-                                  
+
+
+
+
 //                             }
 //                         </>
 //                 }
@@ -167,21 +167,21 @@ import { handleInputs, handleSideBar } from '../../Redux/chatbotSlice';
 
 
 type mainPropes = {
-  handilFetchApi:()=>void
-  handleKeyDown: (e:React.KeyboardEvent<HTMLInputElement>) => void;
+  handilFetchApi: () => void
+  handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
-function Main({   handleKeyDown,handilFetchApi }: mainPropes) {
-  const { data, loading, chatInput, mainShow ,sideBar, input} = useSelector((state: RootState) => state.chatRes);
+function Main({ handleKeyDown, handilFetchApi }: mainPropes) {
+  const { data, loading, chatInput, mainShow, sideBar, input } = useSelector((state: RootState) => state.chatRes);
 
- 
-  
- 
-  
+
+
+
+
   const dispatch = useDispatch<AppDispatch>();
 
   const [, setResolvedHTML] = useState<string>('');
-  const [animatedHTML, setAnimatedHTML] = useState<string>(''); 
+  const [animatedHTML, setAnimatedHTML] = useState<string>('');
 
   const keyword: string = ';';
 
@@ -206,24 +206,24 @@ function Main({   handleKeyDown,handilFetchApi }: mainPropes) {
 
 
   const splitHTML = (html: string) => {
-    const regex = /(<[^>]+>|[^<]+)/g; 
+    const regex = /(<[^>]+>|[^<]+)/g;
     return html.match(regex) || [];
   };
 
 
   const typeHTML = (htmlString: string, speed: number = 50) => {
-    const splitContent = splitHTML(htmlString); 
+    const splitContent = splitHTML(htmlString);
     let currentIndex = 0;
     let currentHTML = '';
 
     const interval = setInterval(() => {
       if (currentIndex < splitContent.length) {
         const currentPart = splitContent[currentIndex];
-        currentHTML += currentPart; 
-        setAnimatedHTML(currentHTML); 
+        currentHTML += currentPart;
+        setAnimatedHTML(currentHTML);
         currentIndex++;
       } else {
-        clearInterval(interval); 
+        clearInterval(interval);
       }
     }, speed);
   };
@@ -242,17 +242,17 @@ function Main({   handleKeyDown,handilFetchApi }: mainPropes) {
     <div className='p-6 h-[100vh] relative w-full mainBackground'>
       <div className='flex justify-between '>
         <div className='flex items-center gap-3'>
-            {
-                sideBar?   <Buttons onClick={()=>dispatch(handleSideBar())} className=' text-white'>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
-              </Buttons>:
-          ""
-            }
-      
-       
-      <h2 className='main-text font-semibold text-xl '>Ai ChatBot</h2>
+          {
+            sideBar ? <Buttons onClick={() => dispatch(handleSideBar())} className=' text-white'>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+            </Buttons> :
+              ""
+          }
+
+
+          <h2 className='main-text font-semibold text-xl '>Ai ChatBot</h2>
 
         </div>
         <button>
@@ -286,7 +286,7 @@ function Main({   handleKeyDown,handilFetchApi }: mainPropes) {
         )}
       </div>
       <div className='flex items-center absolute bottom-0 mb-10 left-0 right-0 w-full max-w-[900px] bg-white m-auto rounded-md'>
-        <input className='w-[95%] rounded-md p-3 outline-none' type="text" placeholder='Enter your prompt.......' value={input} onChange={(e) => dispatch(handleInputs(e.target.value))}  onKeyDown={handleKeyDown} />
+        <input className='w-[95%] rounded-md p-3 outline-none' type="text" placeholder='Enter your prompt.......' value={input} onChange={(e) => dispatch(handleInputs(e.target.value))} onKeyDown={handleKeyDown} />
         <button onClick={handilFetchApi}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
@@ -299,4 +299,4 @@ function Main({   handleKeyDown,handilFetchApi }: mainPropes) {
 
 
 
-export default React.memo(Main) ;
+export default React.memo(Main);
