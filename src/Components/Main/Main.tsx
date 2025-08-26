@@ -239,7 +239,7 @@ function Main({ handleKeyDown, handilFetchApi }: mainPropes) {
   }, [data?.response]);
 
   return (
-<div className="p-6 h-screen relative w-full bg-[var(--color-dark-bg)] flex flex-col">
+<div className="p-6 h-screen relative w-full bg-[var(--color-light-bg)] dark:bg-[var(--color-dark-bg)] flex flex-col">
   {/* Header */}
   <div className="flex justify-between items-center">
     <div className="flex items-center gap-3">

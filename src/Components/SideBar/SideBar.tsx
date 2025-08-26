@@ -5,6 +5,7 @@ import { addManinShowToTrue, addPreviousDataToMain, handleSideBar } from '../../
 import { AppDispatch, RootState } from '../../Redux/store';
 import Buttons from '../Buttons/Buttons';
 import { Gem, Moon, SunMoon, Trash, User } from 'lucide-react';
+import ThemeProvider from '../ThemeProvider/ThemeProvider';
 
 
 
@@ -137,7 +138,7 @@ const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
             </div>
             <div className="space-y-3">
                 {/* Credits Card */}
-                <div className="flex items-center gap-3 border border-[var(--color-dark-border)]  p-2 rounded-md shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-2 border border-[var(--color-dark-border)]  p-2 rounded-md shadow-sm hover:shadow-md transition-shadow">
                     <div className="p-2 rounded-lg bg-[var(--color-dark-accent-bg)] text-[var(--color-dark-accent)]">
                         <Gem className="w-5 h-5" />
                     </div>
@@ -163,7 +164,7 @@ const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
                     </div>
 
                     <button className="p-2 rounded-lg bg-[var(--color-dark-accent-bg)] text-[var(--color-dark-accent)] cursor-pointer hover:scale-105 transition-transform">
-                        <Moon className="w-5 h-5" />
+                       <ThemeProvider/>
                     </button>
                 </div>
 
