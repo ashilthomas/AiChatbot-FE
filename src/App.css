@@ -1,18 +1,4 @@
-.mainBackground{
-  background-image: radial-gradient(145.05% 100% at 50% 0, #1d2b41 0, #020509 57.38%, #0f1a29 88.16%);
-}
-:root {
-  --primary-color: #3498db;
-  --secondary-color: #4d78ef;
-  --main-text-color: #7ed4fd;
-
-}
-.main-text{
-  color: var(--main-text-color);
-}
-
-@media (max-width: 560px) {
-  .side-bar{
-    display: none;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+body{
+  font-family: 'Roboto', sans-serif;
 }

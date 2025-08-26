@@ -75,7 +75,7 @@
 
 
 //     return (
-//         <div className='p-6 h-[100vh] relative w-full mainBackground'>
+//         <div className='p-6 h-screen relative w-full mainBackground'>
 
 //             <div className='flex justify-between '>
 //                 <div className='flex items-center gap-3'>
@@ -103,14 +103,14 @@
 
 //                         <>
 //                             {
-//                                 mainShow ? <p className="relative font-sans uppercase text-6xl tracking-widest overflow-hidden bg-gradient-to-r from-black via-white to-black bg-no-repeat bg-80 animate-shine bg-clip-text text-transparent">
+//                                 mainShow ? <p className="relative font-sans uppercase text-6xl tracking-widest overflow-hidden bg-linear-to-r from-black via-white to-black bg-no-repeat bg-80 animate-shine bg-clip-text text-transparent">
 //                                     A chatbot awaits, your new trusted friend
 //                                 </p>
 //                                     :<>
 
 
 // <div>
-//                                         <span className='flex items-center gap-3 mb-6 bg-slate-100 p-3 rounded-sm'>
+//                                         <span className='flex items-center gap-3 mb-6 bg-slate-100 p-3 rounded-xs'>
 //                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-7">
 //                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
 //                                             </svg>
@@ -143,7 +143,7 @@
 
 //             </div>
 //             <div className=' flex items-center absolute bottom-0 mb-10 left-0 right-0  w-full max-w-[900px]  bg-white m-auto rounded-md'>
-//                 <input className='w-[95%] rounded-md p-3 outline-none' type="text" placeholder='Enter your promt.......' value={input} onChange={(e) => setInput(e.target.value)} />
+//                 <input className='w-[95%] rounded-md p-3 outline-hidden' type="text" placeholder='Enter your promt.......' value={input} onChange={(e) => setInput(e.target.value)} />
 //                 <button onClick={handilFetchApi}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
 //                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
 //                 </svg>
@@ -239,16 +239,16 @@ function Main({ handleKeyDown, handilFetchApi }: mainPropes) {
   }, [data?.response]);
 
   return (
-    <div className='p-6 h-[100vh] relative w-full mainBackground'>
+    <div className='p-6 h-screen relative w-full bg-[var(--color-dark-bg)]'>
       <div className='flex justify-between '>
         <div className='flex items-center gap-3'>
           {
-            sideBar ? <Buttons onClick={() => dispatch(handleSideBar())} className=' text-white'>
+            sideBar || <Buttons onClick={() => dispatch(handleSideBar())} className=' text-white'>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
               </svg>
-            </Buttons> :
-              ""
+            </Buttons> 
+            
           }
 
 
@@ -265,12 +265,12 @@ function Main({ handleKeyDown, handilFetchApi }: mainPropes) {
         ) : (
           <>
             {mainShow ? (
-              <p className="relative font-sans uppercase text-6xl tracking-widest overflow-hidden bg-gradient-to-r from-black via-white to-black bg-no-repeat bg-80 animate-shine bg-clip-text text-transparent">
+              <p className="relative font-sans uppercase text-6xl tracking-widest overflow-hidden bg-linear-to-r from-black via-white to-black bg-no-repeat bg-80 animate-shine bg-clip-text text-transparent">
                 A chatbot awaits, your new trusted friend
               </p>
             ) : (
               <div>
-                <span className='flex items-center gap-3 mb-6 bg-slate-100 p-3 rounded-sm'>
+                <span className='flex items-center gap-3 mb-6 bg-slate-100 p-3 rounded-xs'>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-7">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                   </svg>
@@ -286,7 +286,7 @@ function Main({ handleKeyDown, handilFetchApi }: mainPropes) {
         )}
       </div>
       <div className='flex items-center absolute bottom-0 mb-10 left-0 right-0 w-full max-w-[900px] bg-white m-auto rounded-md'>
-        <input className='w-[95%] rounded-md p-3 outline-none' type="text" placeholder='Enter your prompt.......' value={input} onChange={(e) => dispatch(handleInputs(e.target.value))} onKeyDown={handleKeyDown} />
+        <input className='w-[95%] rounded-md p-3 outline-hidden' type="text" placeholder='Enter your prompt.......' value={input} onChange={(e) => dispatch(handleInputs(e.target.value))} onKeyDown={handleKeyDown} />
         <button onClick={handilFetchApi}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />

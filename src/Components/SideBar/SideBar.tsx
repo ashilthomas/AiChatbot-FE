@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addManinShowToTrue, addPreviousDataToMain, handleSideBar } from '../../Redux/chatbotSlice';
 import { AppDispatch, RootState } from '../../Redux/store';
 import Buttons from '../Buttons/Buttons';
+import { Gem, Moon, SunMoon, User } from 'lucide-react';
 
 
 
@@ -46,66 +47,149 @@ const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
 
 
     return (
-        <div className={`h-[100vh] w-[250px] bg-[#0E0E0F] border-r border-gray-600 py-6 px-3.5 flex-col overflow-y-auto justify-center transform transition-transform duration-300 ease-in-out ${sideBar ? '-translate-x-full  absolute z-10' : ' translate-x-0 absolute z-10'} md:block`}>
-            <div className=''>
-                <button onClick={toggleSideBar} className='text-white'>
-
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        <div
+            className={`h-screen bg-dark-bg border-r border-[var(--color-dark-border)] flex flex-col transition-all duration-300 ease-in-out
+  ${sideBar ? 'w-[300px] px-4 py-6' : 'hidden'} md:w-[300px] md:px-4 md:py-6`}
+        >
+            {/* Header */}
+            <div className="flex items-center justify-between mb-6">
+                <h2 className="text-lg font-semibold text-dark-text tracking-tight">Menu</h2>
+                <button
+                    onClick={toggleSideBar}
+                    className="p-2 rounded-lg hover:bg-dark-muted/20 text-dark-text transition-colors"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-6 h-6"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                        />
                     </svg>
                 </button>
-
             </div>
 
-            <div className="mt-4 mb-4 cursor-pointer text-white">
-
-
-
-
-                <div onClick={handilMain} className="bg-gradient-to-r from-gradientCyanBlue to-gradientCyanBlue2 flex gap-1 items-center  justify-center  text-white rounded-lg p-4">
-                    <h3>New</h3>
-                    <span>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="w-6 h-6"
-                        >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                    </span>
+            {/* New Chat Button */}
+            <div className="mb-6">
+                <div
+                    onClick={handilMain}
+                    className="bg-gradient-to-r from-gradient-cyanblue to-gradient-cyanblue2 flex gap-2 items-center justify-center rounded-md py-3 px-4 text-white font-medium cursor-pointer shadow-md hover:shadow-lg transition-all"
+                >
+                    <h3>New Chat</h3>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={2}
+                        stroke="currentColor"
+                        className="w-5 h-5"
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
                 </div>
 
-
             </div>
-
             <div>
-                <ul>
-                    {
-                        chatHistory && chatHistory.map((item) => (
-
-                            <li key={item?._id} className={clickValue == item._id ? 'bg-zinc-900 rounded-md mb-3 mt-2 text-white hover:bg-zinc-900 p-3 hover:rounded-md cursor-pointer flex justify-between' : ' text-white hover:bg-zinc-900 p-3 hover:rounded-md cursor-pointer flex justify-between'}>
-                                <span onClick={() => handilPreviousToMail(item._id)}>  {item?.userMessage}</span>
-
-
-                                <Buttons onClick={() => handileDeleteHistory(item?._id)}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                    </svg>
-
-                                </Buttons>
-
-                            </li>
-
-                        ))
-                    }
-                </ul>
-
-
+                <form onSubmit={(e) => e.preventDefault()} className="w-full">
+                    <input
+                        type="text"
+                        placeholder="Search chats..."
+                        className="w-full rounded-md bg-dark-muted/20 border border-dark-muted/40 px-3 py-2 text-sm text-dark-text placeholder-dark-muted focus:outline-none focus:ring-2 focus:ring-gradient-cyanblue focus:border-transparent transition"
+                    />
+                </form>
             </div>
+
+            {/* Chat History */}
+
+            <div className="flex-1 mt-4 overflow-y-auto scrollbar-thin scrollbar-thumb-dark-muted/40 scrollbar-track-transparent">
+                <h2 className='text-sm font-semibold text-dark-text tracking-tight'>Recent chats</h2>
+
+                <ul className="space-y-2">
+                    {chatHistory &&
+                        chatHistory.map((item) => (
+                            <li
+                                key={item?._id}
+                                className={`flex items-center justify-between p-3 rounded-lg text-sm font-medium cursor-pointer transition-colors
+            ${clickValue === item._id
+                                        ? 'bg-dark-muted/30 text-white'
+                                        : 'text-dark-text hover:bg-dark-muted/20'
+                                    }`}
+                            >
+                                <span onClick={() => handilPreviousToMail(item._id)} className="truncate">
+                                    {item?.userMessage}
+                                </span>
+
+                                <Buttons onClick={() => handileDeleteHistory(item?._id)} className="ml-2">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth={1.5}
+                                        stroke="currentColor"
+                                        className="w-5 h-5 text-dark-muted hover:text-red-400 transition-colors"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                                        />
+                                    </svg>
+                                </Buttons>
+                            </li>
+                        ))}
+                </ul>
+            </div>
+         <div className="space-y-3">
+  {/* Credits Card */}
+  <div className="flex items-center gap-3 border border-[var(--color-dark-border)]  p-2 rounded-md shadow-sm hover:shadow-md transition-shadow">
+    <div className="p-2 rounded-lg bg-[var(--color-dark-accent-bg)] text-[var(--color-dark-accent)]">
+      <Gem className="w-5 h-5" />
+    </div>
+    <div className="flex flex-col">
+      <h2 className="text-sm font-medium text-[var(--color-dark-text)]">
+        Credits: <span className="font-semibold">10</span>
+      </h2>
+      <p className="text-xs text-[var(--color-dark-muted)]">
+        Purchase credits for unlimited chat
+      </p>
+    </div>
+  </div>
+
+  {/* Theme Mode Card */}
+  <div className="flex items-center justify-between border border-[var(--color-dark-border)]  p-2 rounded-md shadow-sm hover:shadow-md transition-shadow">
+    <div className="flex items-center gap-2">
+      <div className="p-2 rounded-lg bg-[var(--color-dark-accent-bg)] text-[var(--color-dark-accent)]">
+        <SunMoon className="w-5 h-5" />
+      </div>
+      <h2 className="text-sm font-medium text-[var(--color-dark-text)]">
+        Dark Mode
+      </h2>
+    </div>
+
+    <button className="p-2 rounded-lg bg-[var(--color-dark-accent-bg)] text-[var(--color-dark-accent)] cursor-pointer hover:scale-105 transition-transform">
+      <Moon className="w-5 h-5" />
+    </button>
+  </div>
+
+  {/* Profile Card */}
+  <div className="flex items-center gap-3 border border-[var(--color-dark-border)] p-2 rounded-md shadow-sm hover:shadow-md transition-shadow">
+    <div className="p-2 rounded-lg bg-[var(--color-dark-accent-bg)] text-[var(--color-dark-accent)]">
+      <User className="w-5 h-5" />
+    </div>
+    <h2 className="text-sm font-medium text-[var(--color-dark-text)]">
+      Ashil Thomas
+    </h2>
+  </div>
+</div>
+
         </div>
+
 
 
     );
