@@ -49,15 +49,15 @@ const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
 
     return (
         <div
-            className={`h-screen bg-dark-bg border-r border-[var(--color-dark-border)] flex flex-col transition-all duration-300 ease-in-out
+            className={`h-screen   border-r themeBorder flex flex-col transition-all duration-300 ease-in-out
   ${sideBar ? 'w-[300px] px-4 py-6' : 'hidden'} md:w-[300px] md:px-4 md:py-6`}
         >
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-semibold text-dark-text tracking-tight">Menu</h2>
+                <h2 className="text-lg font-semibold themeText tracking-tight">AiChat Bot</h2>
                 <button
                     onClick={toggleSideBar}
-                    className="p-2 rounded-lg hover:bg-dark-muted/20 text-dark-text transition-colors"
+                    className="p-2 rounded-lg hover:bg-dark-muted/20 themeText transition-colors"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -109,20 +109,20 @@ const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
             {/* Chat History */}
 
             <div className="flex-1 mt-4 overflow-y-auto scrollbar-thin scrollbar-thumb-dark-muted/40 scrollbar-track-transparent">
-                <h2 className='text-sm font-semibold text-dark-text tracking-tight'>Recent chats</h2>
+                <h2 className='text-sm font-semibold themeText tracking-tight'>Recent chats</h2>
 
                 <ul className="space-y-2">
                     {chatHistory &&
                         chatHistory.map((item) => (
                             <li
                                 key={item?._id}
-                                className={`flex items-center justify-between p-3 mt-3 bg-[var(--input-dark-bg)] border border-[var(--color-dark-border)] rounded-md text-sm font-medium cursor-pointer transition-colors
+                                className={`flex items-center justify-between p-3 mt-3 themeBG border themeBorder rounded-md text-sm font-medium cursor-pointer transition-colors
             ${clickValue === item._id
-                                        ? 'bg-dark-muted/30 text-white'
-                                        : 'text-dark-text hover:bg-dark-muted/20'
+                                        ? 'bg-dark-muted/30 themeText'
+                                        : 'themeText hover:bg-dark-muted/20'
                                     }`}
                             >
-                                <span onClick={() => handilPreviousToMail(item._id)} className="truncate">
+                                <span  onClick={() => handilPreviousToMail(item._id)} className="truncate ">
                                     {item?.userMessage}
                                 </span>
 
@@ -138,12 +138,12 @@ const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
             </div>
             <div className="space-y-3">
                 {/* Credits Card */}
-                <div className="flex items-center gap-2 border border-[var(--color-dark-border)]  p-2 rounded-md shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-2 border themeBorder p-2 rounded-md shadow-sm hover:shadow-md transition-shadow">
                     <div className="p-2 rounded-lg bg-[var(--color-dark-accent-bg)] text-[var(--color-dark-accent)]">
                         <Gem className="w-5 h-5" />
                     </div>
                     <div className="flex flex-col">
-                        <h2 className="text-sm font-medium text-[var(--color-dark-text)]">
+                        <h2 className="text-sm font-medium themeText">
                             Credits: <span className="font-semibold">10</span>
                         </h2>
                         <p className="text-xs text-[var(--color-dark-muted)]">
@@ -153,12 +153,12 @@ const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
                 </div>
 
                 {/* Theme Mode Card */}
-                <div className="flex items-center justify-between border border-[var(--color-dark-border)]  p-2 rounded-md shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center justify-between border themeBorder  p-2 rounded-md shadow-sm hover:shadow-md transition-shadow">
                     <div className="flex items-center gap-2">
                         <div className="p-2 rounded-lg bg-[var(--color-dark-accent-bg)] text-[var(--color-dark-accent)]">
                             <SunMoon className="w-5 h-5" />
                         </div>
-                        <h2 className="text-sm font-medium text-[var(--color-dark-text)]">
+                        <h2 className="text-sm font-medium themeText">
                             Dark Mode
                         </h2>
                     </div>
@@ -169,11 +169,11 @@ const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
                 </div>
 
                 {/* Profile Card */}
-                <div className="flex items-center gap-3 border border-[var(--color-dark-border)] p-2 rounded-md shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3 border themeBorder p-2 rounded-md shadow-sm hover:shadow-md transition-shadow">
                     <div className="p-2 rounded-lg bg-[var(--color-dark-accent-bg)] text-[var(--color-dark-accent)]">
                         <User className="w-5 h-5" />
                     </div>
-                    <h2 className="text-sm font-medium text-[var(--color-dark-text)]">
+                    <h2 className="text-sm font-medium themeText">
                         Ashil Thomas
                     </h2>
                 </div>

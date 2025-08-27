@@ -1,13 +1,12 @@
 
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { User } from 'lucide-react'
-import ThemeProvider from '../ThemeProvider/ThemeProvider'
 
 
 function Options() {
   return (
     <div>
-<ThemeProvider />
+
 
       <Menu as="div" className="relative inline-block text-left">
         <div>

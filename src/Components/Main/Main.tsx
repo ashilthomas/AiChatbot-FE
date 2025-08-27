@@ -239,7 +239,7 @@ function Main({ handleKeyDown, handilFetchApi }: mainPropes) {
   }, [data?.response]);
 
   return (
-<div className="p-6 h-screen relative w-full bg-[var(--color-light-bg)] dark:bg-[var(--color-dark-bg)] flex flex-col">
+<div className="p-6 h-screen relative w-full   flex flex-col">
   {/* Header */}
   <div className="flex justify-between items-center">
     <div className="flex items-center gap-3">
@@ -319,14 +319,14 @@ function Main({ handleKeyDown, handilFetchApi }: mainPropes) {
   </div>
 
   {/* Input Box */}
-  <div className="absolute bottom-8 left-0 right-0 mx-auto w-full max-w-[600px] flex items-center border border-[var(--input-dark-border)] bg-[var(--input-dark-bg)] rounded-full shadow-sm focus-within:ring-2 focus-within:ring-[var(--input-dark-border-focus)] transition">
+  <div className="absolute bottom-8 left-0 right-0 mx-auto w-full max-w-[600px] flex items-center border themeInput  rounded-full shadow-sm focus-within:ring-2 focus-within:ring-[var(--input-dark-border-focus)] transition">
     <input
       type="text"
       placeholder="Enter your prompt..."
       value={input}
       onChange={(e) => dispatch(handleInputs(e.target.value))}
       onKeyDown={handleKeyDown}
-      className="flex-1 bg-transparent rounded-full px-4 py-3 text-[var(--input-dark-text)] placeholder-[var(--input-dark-placeholder)] focus:outline-none text-sm"
+      className="flex-1 bg-transparent rounded-full px-4 py-3 themeInputText placeholder-[var(--input-dark-placeholder)] focus:outline-none text-sm"
     />
     <button
       onClick={handilFetchApi}

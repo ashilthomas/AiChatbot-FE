@@ -3,24 +3,8 @@
 
 /* Register dark variant */
 @custom-variant dark (&:where(.dark, .dark *));
-@layer base {
-  *, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  
-  }
 
-  html {
-  scroll-behavior: smooth;
-
-
-}
-}
-body{
-  font-family: 'Roboto', sans-serif;
-   overflow-y: hidden;
-}
+/* Theme Variables */
 @theme {
   --color-dark-bg: #0E0E0F;
   --color-dark-accent: #00F5D4;
@@ -29,9 +13,10 @@ body{
   --color-dark-text: #E5E5E5;
   --color-dark-muted: #9CA3AF;
   --color-dark-border: #1F2937;
- --input-dark-bg: #1A1D21;
-    --input-dark-border: #2A2F35;
-      --input-dark-border-focus: #00F5D4;
+
+  --input-dark-bg: #1A1D21;
+  --input-dark-border: #2A2F35;
+  --input-dark-border-focus: #00F5D4;
   --input-dark-text: #E5E5E5;
   --input-dark-placeholder: #6B7280;
   --input-dark-error: #FF4D6D;
@@ -43,6 +28,7 @@ body{
   --color-light-text: #1F2937;
   --color-light-muted: #6B7280;
   --color-light-border: #E5E7EB;
+
   --input-light-bg: #FFFFFF;
   --input-light-border: #D1D5DB;
   --input-light-border-focus: #2563EB;
@@ -55,6 +41,52 @@ body{
   --color-gradient-purplepink: #A78BFA;
   --color-gradient-purplepink2: #FF4D6D;
 }
+
+/* Base styles */
+@layer base {
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    overflow-y: hidden;
+
+    @apply bg-[var(--color-light-bg)] dark:bg-[var(--color-dark-bg)];
+  }
+
+  .themeBG {
+    @apply bg-[var(--color-light-bg)] dark:bg-[var(--color-dark-bg)];
+  }
+  .themeBorder{
+    @apply border-[var(--color-light-border)] dark:border-[var(--color-dark-border)];
+  }
+  .themeText{
+    @apply text-[var(--color-light-text)] dark:text-[var(--color-dark-text)];
+  }
+  .themeInput{
+    @apply bg-[var(--input-light-bg)] border-[var(--input-light-border)] dark:bg-[var(--input-dark-bg)] dark:border-[var(--input-dark-border)];
+  }
+  .themeInputFocus{
+    @apply border-[var(--input-light-border-focus)] dark:border-[var(--input-dark-border-focus)];
+  }
+  .themeInputText{
+    @apply text-[var(--input-light-text)] dark:text-[var(--input-dark-text)];
+  }
+  .themeInputPlaceholder{
+    @apply text-[var(--input-light-placeholder)] dark:text-[var(--input-dark-placeholder)];
+  }
+  .themeInputError{
+    @apply text-[var(--input-light-error)] dark:text-[var(--input-dark-error)];
+  }
+}
+
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
