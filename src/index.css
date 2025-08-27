@@ -85,6 +85,9 @@
   .themeInputError{
     @apply text-[var(--input-light-error)] dark:text-[var(--input-dark-error)];
   }
+  .iconBg{
+    @apply text-[var(--color-dark-accent2)] dark:text-[var(--color-dark-accent)];
+  }
 }
 
 /*

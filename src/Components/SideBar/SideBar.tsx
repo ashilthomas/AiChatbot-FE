@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from '../../Redux/store';
 import Buttons from '../Buttons/Buttons';
 import { Gem, Moon, SunMoon, Trash, User } from 'lucide-react';
 import ThemeProvider from '../ThemeProvider/ThemeProvider';
+import { Link } from 'react-router-dom';
 
 
 
@@ -128,7 +129,7 @@ const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
 
                                 <Buttons onClick={() => handileDeleteHistory(item?._id)} className="ml-2">
                                
-                                     <div className=" rounded-lg  text-[var(--color-dark-accent)]">
+                                     <div className=" rounded-lg iconBg">
                             <Trash className="w-5 h-5"  />
                         </div>
                                 </Buttons>
@@ -138,24 +139,30 @@ const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
             </div>
             <div className="space-y-3">
                 {/* Credits Card */}
+              
                 <div className="flex items-center gap-2 border themeBorder p-2 rounded-md shadow-sm hover:shadow-md transition-shadow">
-                    <div className="p-2 rounded-lg bg-[var(--color-dark-accent-bg)] text-[var(--color-dark-accent)]">
+                      
+                    <div className="p-2 rounded-lg iconBg">
+                        <Link to="/credit">
                         <Gem className="w-5 h-5" />
+                           </Link>
                     </div>
                     <div className="flex flex-col">
-                        <h2 className="text-sm font-medium themeText">
+                        <h2 className="text-sm font-medium themeText mb-1">
                             Credits: <span className="font-semibold">10</span>
                         </h2>
                         <p className="text-xs text-[var(--color-dark-muted)]">
                             Purchase credits for unlimited chat
                         </p>
-                    </div>
+                    </div>   
+                 
                 </div>
+             
 
                 {/* Theme Mode Card */}
                 <div className="flex items-center justify-between border themeBorder  p-2 rounded-md shadow-sm hover:shadow-md transition-shadow">
                     <div className="flex items-center gap-2">
-                        <div className="p-2 rounded-lg bg-[var(--color-dark-accent-bg)] text-[var(--color-dark-accent)]">
+                        <div className="p-2 rounded-lg iconBg">
                             <SunMoon className="w-5 h-5" />
                         </div>
                         <h2 className="text-sm font-medium themeText">
@@ -170,7 +177,7 @@ const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
 
                 {/* Profile Card */}
                 <div className="flex items-center gap-3 border themeBorder p-2 rounded-md shadow-sm hover:shadow-md transition-shadow">
-                    <div className="p-2 rounded-lg bg-[var(--color-dark-accent-bg)] text-[var(--color-dark-accent)]">
+                    <div className="p-2 rounded-lg iconBg">
                         <User className="w-5 h-5" />
                     </div>
                     <h2 className="text-sm font-medium themeText">

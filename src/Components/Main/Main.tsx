@@ -289,7 +289,7 @@ function Main({ handleKeyDown, handilFetchApi }: mainPropes) {
     ) : (
       <div className="w-full">
         {/* User Query Bubble */}
-        <span className="flex items-center gap-3 mb-6 bg-[var(--input-dark-bg)] border border-[var(--input-dark-border)] p-3 rounded-lg shadow-sm">
+        <span className="flex items-center gap-3 mb-6 bg-[var(--color-dark-accent2)]  p-3 rounded-lg shadow-sm">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -310,7 +310,7 @@ function Main({ handleKeyDown, handilFetchApi }: mainPropes) {
         {/* Bot Response */}
         <div className="h-[470px] overflow-y-auto no-scrollbar px-1">
           <p
-            className="text-[var(--color-dark-text)] leading-relaxed"
+            className="themeText leading-relaxed"
             dangerouslySetInnerHTML={{ __html: animatedHTML }}
           ></p>
         </div>
