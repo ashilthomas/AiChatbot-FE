@@ -7,6 +7,8 @@ import Buttons from '../Buttons/Buttons';
 import { Gem, Moon, SunMoon, Trash, User } from 'lucide-react';
 import ThemeProvider from '../ThemeProvider/ThemeProvider';
 import { Link } from 'react-router-dom';
+import Register from '../../Pages/Register';
+
 
 
 
@@ -207,11 +209,14 @@ const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
 
           {/* Profile */}
           <div className="flex items-center gap-3 p-2 border themeBorder rounded-md shadow-sm hover:shadow-md transition-shadow">
-            <div className="p-2 rounded-lg iconBg">
-              <User className="w-5 h-5" />
+            <div className="p-1 rounded-lg iconBg">
+              
+                <Register/>  
             </div>
-            <h2 className="text-sm font-medium themeText">Ashil Thomas</h2>
+            
+        
           </div>
+      
         </div>
       </div>
     </div>

@@ -164,6 +164,7 @@ import { AppDispatch, RootState } from "../../Redux/store";
 import { marked } from 'marked';
 import Loading from '../Loading/Loading';
 import { handleInputs, handleSideBar } from '../../Redux/chatbotSlice';
+import Register from '../../Pages/Register';
 
 
 type mainPropes = {
@@ -241,7 +242,7 @@ function Main({ handleKeyDown, handilFetchApi }: mainPropes) {
   return (
 <div className="p-6 h-screen relative w-full    flex flex-col">
   {/* Header */}
-  <div className="flex justify-between items-center">
+  <div className="flex justify-between items-center relative">
     {/* <div className="flex items-center gap-3">
       {!sideBar && (
         <Buttons
@@ -266,9 +267,12 @@ function Main({ handleKeyDown, handilFetchApi }: mainPropes) {
       )}
     </div> */}
 
-    <button className="text-[var(--color-dark-text)] hover:text-[var(--color-dark-accent)] transition-colors">
-      <Options />
-    </button>
+    <div className='aboslute  right-6'>
+    <Register/>
+    </div>
+
+
+  
   </div>
 
   {/* Chat Section */}

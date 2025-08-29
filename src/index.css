@@ -88,6 +88,12 @@
   .iconBg{
     @apply text-[var(--color-dark-accent2)] dark:text-[var(--color-dark-accent)];
   }
+  .buttonBg{
+    @apply bg-[var(--color-dark-accent)] dark:bg-[var(--color-dark-accent2)];
+  }
+  .buttonHover{
+    @apply bg-[var(--color-dark-accent2)] dark:bg-[var(--color-dark-accent)];
+  }
 }
 
 /*
