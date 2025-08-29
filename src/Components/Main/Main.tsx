@@ -239,10 +239,10 @@ function Main({ handleKeyDown, handilFetchApi }: mainPropes) {
   }, [data?.response]);
 
   return (
-<div className="p-6 h-screen relative w-full   flex flex-col">
+<div className="p-6 h-screen relative w-full    flex flex-col">
   {/* Header */}
   <div className="flex justify-between items-center">
-    <div className="flex items-center gap-3">
+    {/* <div className="flex items-center gap-3">
       {!sideBar && (
         <Buttons
           onClick={() => dispatch(handleSideBar())}
@@ -264,7 +264,7 @@ function Main({ handleKeyDown, handilFetchApi }: mainPropes) {
           </svg>
         </Buttons>
       )}
-    </div>
+    </div> */}
 
     <button className="text-[var(--color-dark-text)] hover:text-[var(--color-dark-accent)] transition-colors">
       <Options />

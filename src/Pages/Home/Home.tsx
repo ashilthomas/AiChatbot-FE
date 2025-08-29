@@ -62,10 +62,12 @@ function Home() {
 
 
   return (
-     <div className='flex relative themeBG w-full h-screen'>
-         <SideBar handileDeleteHistory={handileDeleteHistory} />
-         <Main   handleKeyDown={handleKeyDown} handilFetchApi={handilFetchApi} />
-       </div>
+<div className="flex relative themeBG h-screen">
+  <SideBar handileDeleteHistory={handileDeleteHistory} />
+  <div className="flex-1">
+    <Main handleKeyDown={handleKeyDown} handilFetchApi={handilFetchApi} />
+  </div>
+</div>
   )
 }
 
