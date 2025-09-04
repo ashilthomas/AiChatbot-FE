@@ -5,17 +5,29 @@ import axios from 'axios';
 import { addInput, addManinShow, fetchMenusFailure, fetchMenusStart, fetchMenusSuccess, getChatHistory } from '../../Redux/chatbotSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch,RootState } from '../../Redux/store';
+import { useAuth } from '@clerk/clerk-react';
+
 
 
 function Home() {
+
+  const { getToken } = useAuth();
+  console.log(getToken);
+  
+  
   const {  input} = useSelector((state: RootState) => state.chatRes);
+  //3005//aichatbot-be.onrender.com/api/v1/chat/apireq
 
   const dispatch = useDispatch<AppDispatch>();
   const handilFetchApi = async () => {
     try {
       dispatch(fetchMenusStart());
       dispatch(addInput(input))
-      const res = await axios.post("https://aichatbot-be.onrender.com/api/v1/chat/apireq", { message: input });
+      const res = await axios.post("http://localhost:8000/api/v1/chat/apireq", { message: input },{
+        headers: {
+          Authorization: `Bearer ${await getToken()}`,
+        },
+      });
       dispatch(fetchMenusSuccess(res.data));
       dispatch(addManinShow())
       fetchChatHistory();
@@ -29,7 +41,11 @@ function Home() {
 
   const fetchChatHistory = useCallback(async () => {
     try {
-      const res = await axios.get("https://aichatbot-be.onrender.com/api/v1/chat/history");
+      const res = await axios.get("http://localhost:8000/api/v1/chat/history",{
+           headers: {
+          Authorization: `Bearer ${await getToken()}`,
+        },
+      });
       dispatch(getChatHistory(res.data.history));
     } catch (error) {
       console.log(error);
@@ -43,7 +59,11 @@ function Home() {
  
   const handileDeleteHistory = useCallback(async (id: string | number) => {
     try {
-      const res = await axios.delete(`https://aichatbot-be.onrender.com/api/v1/chat/delete/${id}`);
+      const res = await axios.delete(`https://aichatbot-be.onrender.com/api/v1/chat/delete/${id}`,{
+            headers: {  
+          Authorization: `Bearer ${await getToken()}`,
+        },
+      });
       if (res.data.success) {
         fetchChatHistory();
       } else {
@@ -62,9 +82,9 @@ function Home() {
 
 
   return (
-<div className="flex relative themeBG h-screen">
+  <div className="flex h-screen themeBG">
   <SideBar handileDeleteHistory={handileDeleteHistory} />
-  <div className="flex-1">
+  <div className="flex-1 transition-all duration-300">
     <Main handleKeyDown={handleKeyDown} handilFetchApi={handilFetchApi} />
   </div>
 </div>

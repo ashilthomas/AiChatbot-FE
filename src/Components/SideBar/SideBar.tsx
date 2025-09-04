@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addManinShowToTrue, addPreviousDataToMain, handleSideBar } from '../../Redux/chatbotSlice';
@@ -20,10 +20,13 @@ type sideBarTy = {
 }
 
 const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
+  
     const [clickValue, setClickValue] = useState<number>(0)
 
     const { chatHistory, sideBar } = useSelector((state: RootState) => state.chatRes);
 
+    console.log(chatHistory);
+    
 
 
 
@@ -48,6 +51,7 @@ const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
     };
 
 
+  
 
 
     return (
@@ -209,7 +213,7 @@ const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
 
           {/* Profile */}
           <div className="flex items-center gap-3 p-2 border themeBorder rounded-md shadow-sm hover:shadow-md transition-shadow">
-            <div className="p-1 rounded-lg iconBg">
+            <div className="py-1 px-1 rounded-lg iconBg w-full">
               
                 <Register/>  
             </div>
