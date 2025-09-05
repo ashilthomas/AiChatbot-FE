@@ -170,10 +170,13 @@ import Register from '../../Pages/Register';
 type mainPropes = {
   handilFetchApi: () => void
   handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  setCharOrImg: React.Dispatch<React.SetStateAction<string>>;
+  charOrImg: string;
 };
 
-function Main({ handleKeyDown, handilFetchApi }: mainPropes) {
-  const { data, loading, chatInput, mainShow, sideBar, input } = useSelector((state: RootState) => state.chatRes);
+function Main({ handleKeyDown, handilFetchApi,setCharOrImg, charOrImg }: mainPropes) {
+  const { data, loading, chatInput, mainShow, input } = useSelector((state: RootState) => state.chatRes);
+
 
 
 
@@ -324,6 +327,16 @@ function Main({ handleKeyDown, handilFetchApi }: mainPropes) {
 
   {/* Input Box */}
   <div className="absolute bottom-8 left-0 right-0 mx-auto w-full max-w-[600px] flex items-center border themeInput  rounded-full shadow-sm focus-within:ring-2 focus-within:ring-[var(--input-dark-border-focus)] transition">
+  <div>
+    <select
+      value={charOrImg}
+      onChange={(e) => setCharOrImg(e.target.value)}
+      className="ml-3 bg-transparent outline-none text-sm themeText"
+    >
+      <option value="chat">Chat</option>
+      <option value="image">Image</option>
+    </select>
+  </div>
     <input
       type="text"
       placeholder="Enter your prompt..."

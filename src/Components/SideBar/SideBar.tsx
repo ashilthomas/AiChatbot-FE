@@ -16,16 +16,17 @@ import Register from '../../Pages/Register';
 type sideBarTy = {
 
     handileDeleteHistory: (params: string | number) => void
+    ChatHistoryById?: (params: number) => void
 
 }
 
-const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
+const SideBar = React.memo(({ handileDeleteHistory,ChatHistoryById }: sideBarTy) => {
   
     const [clickValue, setClickValue] = useState<number>(0)
 
     const { chatHistory, sideBar } = useSelector((state: RootState) => state.chatRes);
 
-    console.log(chatHistory);
+ 
     
 
 
@@ -50,6 +51,8 @@ const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
         setClickValue(id)
     };
 
+
+    
 
   
 
@@ -151,6 +154,11 @@ const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
             {chatHistory?.map((item) => (
               <li
                 key={item?._id}
+                 onClick={() => {
+                    if ( ChatHistoryById) {
+                      ChatHistoryById(item._id);
+                    }
+                  }}
                 className={`flex items-center justify-between p-3 mt-3 rounded-md 
                   border themeBorder themeBG text-sm font-medium cursor-pointer transition-colors
                   ${
@@ -160,7 +168,8 @@ const SideBar = React.memo(({ handileDeleteHistory }: sideBarTy) => {
                   }`}
               >
                 <span
-                  onClick={() => handilPreviousToMail(item._id)}
+                  // onClick={() => handilPreviousToMail(item._id)}
+                 
                   className="truncate"
                 >
                   {item?.userMessage}
