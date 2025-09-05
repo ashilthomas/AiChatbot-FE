@@ -5,7 +5,9 @@ import { aiChatHistoryts } from '../Types/utils';
 
 
 type ChatApiResponse = {
-  response: string;
+  response?: string; // for text
+  image?: string;    // for image
+  type: "chat" | "image"; // helps frontend know what to render
 };
 
 type ChatApiState = {
@@ -17,6 +19,7 @@ type ChatApiState = {
   chatHistory:aiChatHistoryts[]
   sideBar:boolean
   input:string
+  type?: "chat" | "image";
 };
 
 const initialState: ChatApiState = {
@@ -27,7 +30,8 @@ const initialState: ChatApiState = {
   mainShow:true,
   chatHistory:[],
   sideBar:true,
-  input:""
+  input:"",
+  
 
 };
 
@@ -68,14 +72,14 @@ const chatbotSlice = createSlice({
     getChatHistory: (state, action: PayloadAction<aiChatHistoryts[]>) => {
         state.chatHistory = action.payload; 
       },
-      addPreviousDataToMain: (state, action: PayloadAction<number>) => {
-        const selectedChat = state.chatHistory.find((val) => val._id === action.payload); 
-        if (selectedChat) {
-          state.chatInput = selectedChat.userMessage;
-          state.data = { response: selectedChat.aiResponse }; 
-          state.mainShow = false
-        }
-      },
+      // addPreviousDataToMain: (state, action: PayloadAction<number>) => {
+      //   const selectedChat = state.chatHistory.find((val) => val._id === action.payload); 
+      //   if (selectedChat) {
+      //     state.chatInput = selectedChat.userMessage;
+      //     state.data = { response: selectedChat.aiResponse }; 
+      //     state.mainShow = false
+      //   }
+      // },
       handleSideBar:(state)=>{
         state.sideBar =  !state.sideBar
       },
@@ -88,5 +92,5 @@ const chatbotSlice = createSlice({
   },
 });
 
-export const { fetchMenusStart, fetchMenusSuccess, fetchMenusFailure,addInput,addManinShow,addManinShowToTrue,getChatHistory,addPreviousDataToMain,handleSideBar,handleInputs} = chatbotSlice.actions;
+export const { fetchMenusStart, fetchMenusSuccess, fetchMenusFailure,addInput,addManinShow,addManinShowToTrue,getChatHistory,handleSideBar,handleInputs} = chatbotSlice.actions;
 export default chatbotSlice.reducer;

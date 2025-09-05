@@ -25,23 +25,32 @@ function Home() {
 
 
   const handilFetchApi = async () => {
-  //  const endPoint = chatOrimg === "chat" ? "http://localhost:8000/api/v1/chat/apireq": "http://localhost:8000/api/v1/chat/image"
+   const endPoint = chatOrimg === "chat" ? "http://localhost:5000/api/v1/chat/apireq": "http://localhost:5000/api/v1/image/createImage"
+   console.log(endPoint);
+      const body =
+      chatOrimg === "chat"
+        ? { message: input }
+        : { prompt: input };
+   
     try {
 
       dispatch(fetchMenusStart());
       dispatch(addInput(input))
-      const res = await axios.post("http://localhost:5000/api/v1/chat/apireq", { message: input },{
+            const res = await axios.post(endPoint,body ,{
         headers: {
           Authorization: `Bearer ${await getToken()}`,
         },
       });
-      //       const res = await axios.post(endPoint, { message: input },{
-      //   headers: {
-      //     Authorization: `Bearer ${await getToken()}`,
-      //   },
-      // });
-
-      dispatch(fetchMenusSuccess(res.data));
+    const chat = res.data;
+     console.log(chat);
+     
+      
+dispatch(fetchMenusSuccess({
+  response: chat.type === "chat" ? chat.response : undefined,
+  image: chat.type === "image" ? chat.response : undefined,
+  type: chat.type
+}));
+dispatch(addInput(chat.userMessage));
       dispatch(addManinShow())
       fetchChatHistory();
     } catch (error: any) {
@@ -95,7 +104,7 @@ function Home() {
   }, [handilFetchApi]);
 
 const ChatHistoryById = useCallback(async (id: number) => {
-  try {
+ try {
     const res = await axios.get(
       `http://localhost:5000/api/v1/chat/singleChat/${id}`,
       {
@@ -107,8 +116,13 @@ const ChatHistoryById = useCallback(async (id: number) => {
 
     const chat = res.data.item;
 
-    // Transform data for Redux
-    dispatch(fetchMenusSuccess({ response: chat.aiResponse }));
+    // ✅ FIX: map backend fields -> Redux format
+    dispatch(fetchMenusSuccess({
+      response: chat.type === "chat" ? chat.aiResponse : undefined,
+      image: chat.type === "image" ? chat.aiResponse : undefined,
+      type: chat.type,
+    }));
+
     dispatch(addInput(chat.userMessage));
     dispatch(addManinShow());
   } catch (error) {

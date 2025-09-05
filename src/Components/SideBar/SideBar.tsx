@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addManinShowToTrue, addPreviousDataToMain, handleSideBar } from '../../Redux/chatbotSlice';
+import { addManinShowToTrue, handleSideBar } from '../../Redux/chatbotSlice';
 import { AppDispatch, RootState } from '../../Redux/store';
 import Buttons from '../Buttons/Buttons';
 import { Gem, Moon, SunMoon, Trash, User } from 'lucide-react';
@@ -46,10 +46,10 @@ const SideBar = React.memo(({ handileDeleteHistory,ChatHistoryById }: sideBarTy)
 
     }
 
-    const handilPreviousToMail = (id: number) => {
-        dispatch(addPreviousDataToMain(id));
-        setClickValue(id)
-    };
+    // const handilPreviousToMail = (id: number) => {
+    //     dispatch(addPreviousDataToMain(id));
+    //     setClickValue(id)
+    // };
 
 
     
@@ -150,7 +150,7 @@ const SideBar = React.memo(({ handileDeleteHistory,ChatHistoryById }: sideBarTy)
           <h2 className="text-sm font-semibold themeText tracking-tight">
             Recent Chats
           </h2>
-          <ul className="space-y-2">
+          <ul className="space-y-2  h-[270px] overflow-y-scroll ">
             {chatHistory?.map((item) => (
               <li
                 key={item?._id}

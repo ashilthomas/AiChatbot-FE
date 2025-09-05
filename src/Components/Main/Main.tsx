@@ -316,6 +316,9 @@ function Main({ handleKeyDown, handilFetchApi,setCharOrImg, charOrImg }: mainPro
 
         {/* Bot Response */}
         <div className="h-[470px] overflow-y-auto no-scrollbar px-1">
+          {
+            
+          }
           <p
             className="themeText leading-relaxed"
             dangerouslySetInnerHTML={{ __html: animatedHTML }}

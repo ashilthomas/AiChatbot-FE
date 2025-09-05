@@ -94,6 +94,31 @@
   .buttonHover{
     @apply bg-[var(--color-dark-accent2)] dark:bg-[var(--color-dark-accent)];
   }
+
+  /* width */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  padding: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #1f2937; /* gray-800 */
+  border-radius: 9999px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #4b5563; /* gray-600 */
+  border-radius: 9999px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af; /* gray-400 */
+}
+
 }
 
 /*
