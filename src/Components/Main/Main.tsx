@@ -176,6 +176,8 @@ type mainPropes = {
 
 function Main({ handleKeyDown, handilFetchApi,setCharOrImg, charOrImg }: mainPropes) {
   const { data, loading, chatInput, mainShow, input } = useSelector((state: RootState) => state.chatRes);
+    // local image loading state (so spinner shows until image finishes downloading)
+  const [imgLoaded, setImgLoaded] = useState(false);
 
 
 
@@ -242,136 +244,123 @@ function Main({ handleKeyDown, handilFetchApi,setCharOrImg, charOrImg }: mainPro
     }
   }, [data?.response]);
 
-  return (
-<div className="p-6 h-screen relative w-full    flex flex-col">
-  {/* Header */}
-  <div className="flex justify-between items-center relative">
-    {/* <div className="flex items-center gap-3">
-      {!sideBar && (
-        <Buttons
-          onClick={() => dispatch(handleSideBar())}
-          className="text-[var(--color-dark-text)] hover:text-[var(--color-dark-accent)] transition-colors"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-7 h-7"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-            />
-          </svg>
-        </Buttons>
-      )}
-    </div> */}
+return (
+  <div className="p-6 h-screen relative w-full flex flex-col">
+    {/* Header */}
 
-    <div className='aboslute  right-6'>
-    <Register/>
+    {/* Chat Section */}
+    <div className="flex-1 w-full max-w-[900px] mx-auto mt-6">
+
+      { loading? <Loading/>:
+      
+      mainShow ? (
+        <div className="flex mt-10 justify-center h-full text-center">
+          <h1 className="font-extrabold text-5xl sm:text-6xl md:text-7xl tracking-tight leading-tight">
+            <span className="block text-[var(--color-dark-text)]">
+              Your Personal
+            </span>
+            <span className="block bg-gradient-to-r from-[var(--color-dark-accent)] to-[var(--color-dark-accent2)] bg-clip-text text-transparent">
+              AI ChatBot
+            </span>
+          </h1>
+        </div>
+      ) : (
+        <div className="w-full">
+          {/* User Query Bubble */}
+          <span className="flex items-center gap-3 mb-6 bg-[var(--color-dark-accent2)] p-3 rounded-lg shadow-sm">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-7 h-7 text-[var(--color-dark-accent)]"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+              />
+            </svg>
+            <h1 className="text-[var(--color-dark-text)]">{chatInput}</h1>
+          </span>
+
+          {/* Bot Response */}
+          <div className="h-[470px] overflow-y-auto no-scrollbar px-1">
+          {
+            loading &&  <Loading/>
+}
+       
+            {data?.type === "chat" && (
+              <p
+                className="themeText leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: animatedHTML }}
+              ></p>
+            )}
+
+            {data?.type === "image" && data.image && (
+              <div className="flex justify-center relative">
+               
+
+                <img
+                  src={data.image}
+                  alt="AI generated"
+                  className={`max-h-[400px] rounded-lg shadow-md transition-opacity duration-500 `}
+                   onLoad={() => setImgLoaded(true)}
+                    onError={() => setImgLoaded(true)}
+                />
+              </div>
+            )}
+   
+
+          </div>
+        </div>
+      )}
     </div>
 
-
-  
-  </div>
-
-  {/* Chat Section */}
-  <div className="flex-1 w-full max-w-[900px] mx-auto mt-6">
-    {loading ? (
-      <Loading />
-    ) : mainShow ? (
-   <div className="flex mt-10 justify-center h-full text-center">
-  <h1 className="font-extrabold text-5xl sm:text-6xl md:text-7xl tracking-tight leading-tight">
-    <span className="block text-[var(--color-dark-text)]">
-      Your Personal
-    </span>
-    <span className="block bg-gradient-to-r from-[var(--color-dark-accent)] to-[var(--color-dark-accent2)] bg-clip-text text-transparent">
-      AI ChatBot
-    </span>
-  </h1>
-</div>
-    ) : (
-      <div className="w-full">
-        {/* User Query Bubble */}
-        <span className="flex items-center gap-3 mb-6 bg-[var(--color-dark-accent2)]  p-3 rounded-lg shadow-sm">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-7 h-7 text-[var(--color-dark-accent)]"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-            />
-          </svg>
-          <h1 className="text-[var(--color-dark-text)]">{chatInput}</h1>
-        </span>
-
-        {/* Bot Response */}
-        <div className="h-[470px] overflow-y-auto no-scrollbar px-1">
-          {
-            
-          }
-          <p
-            className="themeText leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: animatedHTML }}
-          ></p>
-        </div>
+    {/* Input Box */}
+    <div className="absolute bottom-8 left-0 right-0 mx-auto w-full max-w-[600px] flex items-center border themeInput rounded-full shadow-sm focus-within:ring-2 focus-within:ring-[var(--input-dark-border-focus)] transition">
+      <div>
+        <select
+          value={charOrImg}
+          onChange={(e) => setCharOrImg(e.target.value)}
+          className="ml-3 bg-transparent outline-none text-sm themeText"
+        >
+          <option value="chat">Chat</option>
+          <option value="image">Image</option>
+        </select>
       </div>
-    )}
-  </div>
-
-  {/* Input Box */}
-  <div className="absolute bottom-8 left-0 right-0 mx-auto w-full max-w-[600px] flex items-center border themeInput  rounded-full shadow-sm focus-within:ring-2 focus-within:ring-[var(--input-dark-border-focus)] transition">
-  <div>
-    <select
-      value={charOrImg}
-      onChange={(e) => setCharOrImg(e.target.value)}
-      className="ml-3 bg-transparent outline-none text-sm themeText"
-    >
-      <option value="chat">Chat</option>
-      <option value="image">Image</option>
-    </select>
-  </div>
-    <input
-      type="text"
-      placeholder="Enter your prompt..."
-      value={input}
-      onChange={(e) => dispatch(handleInputs(e.target.value))}
-      onKeyDown={handleKeyDown}
-      className="flex-1 bg-transparent rounded-full px-4 py-3 themeInputText placeholder-[var(--input-dark-placeholder)] focus:outline-none text-sm"
-    />
-    <button
-      onClick={handilFetchApi}
-      className="text-white rounded-full p-2 m-2 bg-[var(--color-dark-accent2)] hover:opacity-90 transition"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="w-6 h-6"
+      <input
+        type="text"
+        placeholder="Enter your prompt..."
+        value={input}
+        onChange={(e) => dispatch(handleInputs(e.target.value))}
+        onKeyDown={handleKeyDown}
+        className="flex-1 bg-transparent rounded-full px-4 py-3 themeInputText placeholder-[var(--input-dark-placeholder)] focus:outline-none text-sm"
+      />
+      <button
+        onClick={handilFetchApi}
+        className="text-white rounded-full p-2 m-2 bg-[var(--color-dark-accent2)]  hover:opacity-90 transition"
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
-        />
-      </svg>
-    </button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
+          />
+        </svg>
+      </button>
+    </div>
   </div>
-</div>
+);
 
-
-  );
 }
 
 

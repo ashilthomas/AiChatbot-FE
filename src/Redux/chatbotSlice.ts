@@ -11,38 +11,38 @@ type ChatApiResponse = {
 };
 
 type ChatApiState = {
-  loading: boolean;
+  loading: boolean;   
   data: ChatApiResponse | null;
   error: string | null;
-  chatInput:string,
-  mainShow:boolean
-  chatHistory:aiChatHistoryts[]
-  sideBar:boolean
-  input:string
+  chatInput: string;
+  mainShow: boolean;
+  chatHistory: aiChatHistoryts[];
+  sideBar: boolean;
+  input: string;
   type?: "chat" | "image";
 };
 
+
 const initialState: ChatApiState = {
   loading: false,
-  data: null, 
+ 
+  data: null,
   error: null,
-  chatInput:"",
-  mainShow:true,
-  chatHistory:[],
-  sideBar:true,
-  input:"",
-  
-
+  chatInput: "",
+  mainShow: true,
+  chatHistory: [],
+  sideBar: true,
+  input: "",
 };
-
 const chatbotSlice = createSlice({
   name: 'chatRes',
   initialState,
   reducers: {
-    fetchMenusStart: (state) => {
-      state.loading = true;
+  fetchMenusStart: (state) => {
+    state.loading = true;
       state.error = null;
     },
+
     fetchMenusSuccess: (state, action: PayloadAction<ChatApiResponse>) => {
       state.loading = false;
       state.data = action.payload;
@@ -53,8 +53,10 @@ const chatbotSlice = createSlice({
     },
     fetchMenusFailure: (state, action: PayloadAction<string>) => {
       state.loading = false;
+    
       state.error = action.payload;
     },
+
     addInput:(state, action: PayloadAction<string>)=>{
         state.chatInput = action.payload
     },
@@ -92,5 +94,5 @@ const chatbotSlice = createSlice({
   },
 });
 
-export const { fetchMenusStart, fetchMenusSuccess, fetchMenusFailure,addInput,addManinShow,addManinShowToTrue,getChatHistory,handleSideBar,handleInputs} = chatbotSlice.actions;
+export const { fetchMenusStart, fetchMenusSuccess, fetchMenusFailure,addInput,addManinShow,addManinShowToTrue,getChatHistory,handleSideBar,handleInputs,} = chatbotSlice.actions;
 export default chatbotSlice.reducer;

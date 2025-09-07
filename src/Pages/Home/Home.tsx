@@ -12,7 +12,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 
 function Home() {
-  const [chatOrimg,setCharOrImg] = useState("chat")
+const [chatOrimg, setCharOrImg] = useState("chat");
 
   const { getToken } = useAuth();
 
@@ -24,41 +24,46 @@ function Home() {
   const dispatch = useDispatch<AppDispatch>();
 
 
-  const handilFetchApi = async () => {
-   const endPoint = chatOrimg === "chat" ? "http://localhost:5000/api/v1/chat/apireq": "http://localhost:5000/api/v1/image/createImage"
-   console.log(endPoint);
-      const body =
-      chatOrimg === "chat"
-        ? { message: input }
-        : { prompt: input };
-   
-    try {
+const handilFetchApi = async () => {
+  const endPoint =
+    chatOrimg === "chat"
+      ? "http://localhost:5000/api/v1/chat/apireq"
+      : "http://localhost:5000/api/v1/image/createImage";
 
-      dispatch(fetchMenusStart());
-      dispatch(addInput(input))
-            const res = await axios.post(endPoint,body ,{
-        headers: {
-          Authorization: `Bearer ${await getToken()}`,
-        },
-      });
+  const body =
+    chatOrimg === "chat"
+      ? { message: input }
+      : { prompt: input };
+
+  try {
+    dispatch(fetchMenusStart());
+    dispatch(addInput(input));
+
+    const res = await axios.post(endPoint, body, {
+      headers: {
+        Authorization: `Bearer ${await getToken()}`,
+      },
+    });
+
     const chat = res.data;
-     console.log(chat);
-     
-      
-dispatch(fetchMenusSuccess({
-  response: chat.type === "chat" ? chat.response : undefined,
-  image: chat.type === "image" ? chat.response : undefined,
-  type: chat.type
-}));
-dispatch(addInput(chat.userMessage));
-      dispatch(addManinShow())
-      fetchChatHistory();
-    } catch (error: any) {
+   
 
-      dispatch(fetchMenusFailure(error.message));
-    }
+    // ✅ FIXED: single dispatch
+    dispatch(fetchMenusSuccess({
+      response: chat.type === "chat" ? chat.response : undefined,
+      image: chat.type === "image" ? chat.image : undefined,
+      type: chat.type,
+    }));
 
+    dispatch(addInput(chat.userMessage));
+    dispatch(addManinShow());
+    fetchChatHistory();
+  } catch (error: any) {
+    dispatch(fetchMenusFailure(error.message));
   }
+};
+
+
  
 
   const fetchChatHistory = useCallback(async () => {
