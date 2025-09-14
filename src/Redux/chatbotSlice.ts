@@ -20,6 +20,7 @@ type ChatApiState = {
   sideBar: boolean;
   input: string;
   type?: "chat" | "image";
+  credit:number | null
 };
 
 
@@ -33,6 +34,7 @@ const initialState: ChatApiState = {
   chatHistory: [],
   sideBar: true,
   input: "",
+  credit:null
 };
 const chatbotSlice = createSlice({
   name: 'chatRes',
@@ -88,11 +90,15 @@ const chatbotSlice = createSlice({
       handleInputs:(state,action: PayloadAction<string>)=>{
         state.input = action.payload
 
+      },
+      addCredit:(state,action:PayloadAction<number>)=>{
+        state.credit = action.payload
+
       }
  
 
   },
 });
 
-export const { fetchMenusStart, fetchMenusSuccess, fetchMenusFailure,addInput,addManinShow,addManinShowToTrue,getChatHistory,handleSideBar,handleInputs,} = chatbotSlice.actions;
+export const { fetchMenusStart, fetchMenusSuccess, fetchMenusFailure,addInput,addManinShow,addManinShowToTrue,getChatHistory,handleSideBar,handleInputs,addCredit} = chatbotSlice.actions;
 export default chatbotSlice.reducer;

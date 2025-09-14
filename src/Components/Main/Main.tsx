@@ -340,7 +340,7 @@ return (
       />
       <button
         onClick={handilFetchApi}
-        className="text-white rounded-full p-2 m-2 bg-[var(--color-dark-accent2)]  hover:opacity-90 transition"
+        className="text-white rounded-full p-2 m-2 bg-[var(--color-dark-accent2)] cursor-pointer hover:opacity-90 transition"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

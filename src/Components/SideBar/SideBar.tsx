@@ -24,7 +24,7 @@ const SideBar = React.memo(({ handileDeleteHistory,ChatHistoryById }: sideBarTy)
   
     const [clickValue, setClickValue] = useState<number>(0)
 
-    const { chatHistory, sideBar } = useSelector((state: RootState) => state.chatRes);
+    const { chatHistory, sideBar,credit } = useSelector((state: RootState) => state.chatRes);
 
  
     
@@ -108,7 +108,7 @@ const SideBar = React.memo(({ handileDeleteHistory,ChatHistoryById }: sideBarTy)
           <button
             onClick={handilMain}
             className="w-full flex items-center justify-center gap-2 py-3 px-4 
-              rounded-md bg-gradient-to-r from-gradient-cyanblue to-gradient-cyanblue2
+              rounded-md bg-gradient-to-r from-gradient-cyanblue to-gradient-cyanblue2 cursor-pointer
               text-white font-medium shadow-md hover:shadow-lg
               transition-all duration-300 ease-in-out"
           >
@@ -196,7 +196,7 @@ const SideBar = React.memo(({ handileDeleteHistory,ChatHistoryById }: sideBarTy)
             </Link>
             <div className="flex flex-col">
               <h2 className="text-sm font-medium themeText mb-1">
-                Credits: <span className="font-semibold">10</span>
+                Credits: <span className="font-semibold">{credit}</span>
               </h2>
               <p className="text-xs text-[var(--color-dark-muted)]">
                 Purchase credits for unlimited chat
