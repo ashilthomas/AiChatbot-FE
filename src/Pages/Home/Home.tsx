@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import SideBar from '../../Components/SideBar/SideBar'
 import Main from '../../Components/Main/Main'
-import axios from 'axios';
+
 import { addCredit, addInput, addManinShow, fetchMenusFailure, fetchMenusStart, fetchMenusSuccess, getChatHistory } from '../../Redux/chatbotSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch,RootState } from '../../Redux/store';
 import { useAuth } from '@clerk/clerk-react';
 import toast, { Toaster } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import instance from '../../../axios';
+
 
 
 
@@ -32,8 +33,8 @@ const [chatOrimg, setCharOrImg] = useState("chat");
 
     try {
       const token = await getToken();
-      const res = await axios.post(
-        "http://localhost:8000/api/v1/user/createUser",
+      const res = await instance.post(
+        "user/createUser",
         {}, // empty body
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -58,34 +59,13 @@ const [chatOrimg, setCharOrImg] = useState("chat");
   fetchCredits();
 }, [isSignedIn, getToken]);
 
-// useEffect(() => {
-//   const fetchCredit = async () => {
-//     try {
-     
-      
-
-//       const response = await axios.get("http://localhost:8000/api/v1/chat/credits", {
-//         headers: {
-//         Authorization: `Bearer ${await getToken()}`,
-//       },
-//       });
-
-//       console.log(response.data); // safer than logging entire response
-//     } catch (error) {
-//       console.error("Error fetching credits:", error);
-//     }
-//   };
-
-//   fetchCredit();
-// }, []);
-
 
 
 const handilFetchApi = async () => {
   const endPoint =
     chatOrimg === "chat"
-      ? "http://localhost:8000/api/v1/chat/apireq"
-      : "http://localhost:8000/api/v1/image/createImage";
+      ? "/chat/apireq"
+      : "image/createImage";
 
   const body =
     chatOrimg === "chat"
@@ -96,7 +76,7 @@ const handilFetchApi = async () => {
     dispatch(fetchMenusStart());
     dispatch(addInput(input));
 
-    const res = await axios.post(endPoint, body, {
+    const res = await instance.post(endPoint, body, {
       headers: {
         Authorization: `Bearer ${await getToken()}`,
       },
@@ -141,7 +121,7 @@ const handilFetchApi = async () => {
 
   const fetchChatHistory = useCallback(async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/v1/chat/history",{
+      const res = await instance.get("chat/history",{
            headers: {
           Authorization: `Bearer ${await getToken()}`,
         },
@@ -160,7 +140,7 @@ const handilFetchApi = async () => {
  
   const handileDeleteHistory = useCallback(async (id: string | number) => {
     try {
-      const res = await axios.delete(`http://localhost:8000/api/v1/chat/delete/${id}`,{
+      const res = await instance.delete(`/chat/delete/${id}`,{
             headers: {  
           Authorization: `Bearer ${await getToken()}`,
         },
@@ -184,8 +164,8 @@ const handilFetchApi = async () => {
 
 const ChatHistoryById = useCallback(async (id: number) => {
  try {
-    const res = await axios.get(
-      `http://localhost:8000/api/v1/chat/singleChat/${id}`,
+    const res = await instance.get(
+      `/chat/singleChat/${id}`,
 
       {
         headers: {
