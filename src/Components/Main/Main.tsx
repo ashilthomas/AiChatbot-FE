@@ -15,7 +15,7 @@ type mainProps = {
 function Main({ handleKeyDown, handleFetchApi,setChatOrImg, chatOrImg }: mainProps) {
   const { data, loading, chatInput, mainShow, input } = useSelector((state: RootState) => state.chatRes);
     // local image loading state (so spinner shows until image finishes downloading)
-  // const [imgLoaded, setImgLoaded] = useState(false);
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -73,7 +73,11 @@ function Main({ handleKeyDown, handleFetchApi,setChatOrImg, chatOrImg }: mainPro
         typeHTML(resolvedHTML); // Start typing effect
       });
     }
-  }, [data?.response]);
+    // Reset image loading state when new data arrives
+    if (data?.type === "image") {
+      setImgLoaded(false);
+    }
+  }, [data?.response, data?.type]);
 
 return (
   <div className="p-6 h-screen relative w-full flex flex-col">
@@ -129,15 +133,20 @@ return (
               ></p>
             )}
 
-            {data?.type === "image" && data.image && (
+            {data?.type === "image" && (
               <div className="flex justify-center relative">
-
-
-                <img
-                  src={data.image}
-                  alt="AI generated"
-                  className={`max-h-[400px] rounded-lg shadow-md transition-opacity duration-500 `}
-                />
+                {loading || !imgLoaded ? (
+                  <Loading />
+                ) : null}
+                {data.image && (
+                  <img
+                    src={data.image}
+                    alt="AI generated"
+                    className={`max-h-[400px] rounded-lg shadow-md transition-opacity duration-500 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+                    onLoad={() => setImgLoaded(true)}
+                    onError={() => setImgLoaded(true)} // Show image even if error occurs
+                  />
+                )}
               </div>
             )}
 
