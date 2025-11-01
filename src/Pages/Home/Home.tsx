@@ -14,7 +14,7 @@ import instance from '../../../axios';
 
 
 function Home() {
-const [chatOrimg, setCharOrImg] = useState("chat");
+const [chatOrImg, setChatOrImg] = useState("chat");
 
  
 
@@ -61,14 +61,14 @@ const [chatOrimg, setCharOrImg] = useState("chat");
 
 
 
-const handilFetchApi = async () => {
+const handleFetchApi = async () => {
   const endPoint =
-    chatOrimg === "chat"
+    chatOrImg === "chat"
       ? "/chat/apireq"
-      : "image/createImage";
+      : "/image/createImage";
 
   const body =
-    chatOrimg === "chat"
+    chatOrImg === "chat"
       ? { message: input }
       : { prompt: input };
 
@@ -138,7 +138,7 @@ const handilFetchApi = async () => {
  
   }, []);
  
-  const handileDeleteHistory = useCallback(async (id: string | number) => {
+  const handleDeleteHistory = useCallback(async (id: string | number) => {
     try {
       const res = await instance.delete(`/chat/delete/${id}`,{
             headers: {  
@@ -158,9 +158,9 @@ const handilFetchApi = async () => {
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      handilFetchApi();
+      handleFetchApi();
     }
-  }, [handilFetchApi]);
+  }, [handleFetchApi]);
 
 const ChatHistoryById = useCallback(async (id: number) => {
  try {
@@ -193,9 +193,9 @@ const ChatHistoryById = useCallback(async (id: number) => {
 
   return (
   <div className="flex h-screen themeBG">
-  <SideBar handileDeleteHistory={handileDeleteHistory} ChatHistoryById={ChatHistoryById} />
+  <SideBar handleDeleteHistory={handleDeleteHistory} ChatHistoryById={ChatHistoryById} />
   <div className="flex-1 transition-all duration-300">
-    <Main handleKeyDown={handleKeyDown} handilFetchApi={handilFetchApi} setCharOrImg={setCharOrImg} charOrImg={chatOrimg} />
+    <Main handleKeyDown={handleKeyDown} handleFetchApi={handleFetchApi} setChatOrImg={setChatOrImg} chatOrImg={chatOrImg} />
     <Toaster position="bottom-right" reverseOrder={false} />
   </div>
 </div>

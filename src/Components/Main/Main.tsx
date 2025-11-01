@@ -5,14 +5,14 @@ import { marked } from 'marked';
 import Loading from '../Loading/Loading';
 import { handleInputs } from '../../Redux/chatbotSlice';
 
-type mainPropes = {
-  handilFetchApi: () => void
+type mainProps = {
+  handleFetchApi: () => void
   handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  setCharOrImg: React.Dispatch<React.SetStateAction<string>>;
-  charOrImg: string;
+  setChatOrImg: React.Dispatch<React.SetStateAction<string>>;
+  chatOrImg: string;
 };
 
-function Main({ handleKeyDown, handilFetchApi,setCharOrImg, charOrImg }: mainPropes) {
+function Main({ handleKeyDown, handleFetchApi,setChatOrImg, chatOrImg }: mainProps) {
   const { data, loading, chatInput, mainShow, input } = useSelector((state: RootState) => state.chatRes);
     // local image loading state (so spinner shows until image finishes downloading)
   // const [imgLoaded, setImgLoaded] = useState(false);
@@ -151,8 +151,8 @@ return (
     <div className="absolute bottom-8 left-0 right-0 mx-auto w-full max-w-[600px] flex items-center border themeInput rounded-full shadow-sm focus-within:ring-2 focus-within:ring-[var(--input-dark-border-focus)] transition">
       <div>
         <select
-          value={charOrImg}
-          onChange={(e) => setCharOrImg(e.target.value)}
+          value={chatOrImg}
+          onChange={(e) => setChatOrImg(e.target.value)}
           className="ml-3 bg-transparent outline-none text-sm themeText"
         >
           <option value="chat">Chat</option>
@@ -168,7 +168,7 @@ return (
         className="flex-1 bg-transparent rounded-full px-4 py-3 themeInputText placeholder-[var(--input-dark-placeholder)] focus:outline-none text-sm"
       />
       <button
-        onClick={handilFetchApi}
+        onClick={handleFetchApi}
         className="text-white rounded-full p-2 m-2 bg-[var(--color-dark-accent2)] cursor-pointer hover:opacity-90 transition"
       >
         <svg

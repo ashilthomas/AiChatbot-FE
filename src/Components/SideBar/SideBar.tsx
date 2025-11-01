@@ -14,12 +14,12 @@ import Register from '../../Pages/Register';
 
 type sideBarTy = {
 
-    handileDeleteHistory: (params: string | number) => void
+    handleDeleteHistory: (params: string | number) => void
     ChatHistoryById?: (params: number) => void
 
 }
 
-const SideBar = React.memo(({ handileDeleteHistory,ChatHistoryById }: sideBarTy) => {
+const SideBar = React.memo(({ handleDeleteHistory,ChatHistoryById }: sideBarTy) => {
   
     // const [clickValue, setClickValue] = useState<number>(0)
 
@@ -170,7 +170,7 @@ const SideBar = React.memo(({ handileDeleteHistory,ChatHistoryById }: sideBarTy)
                   {item?.userMessage}
                 </span>
                 <Buttons
-                  onClick={() => handileDeleteHistory(item?._id)}
+                  onClick={() => handleDeleteHistory(item?._id)}
                   className="ml-2"
                 >
                   <div className="rounded-lg iconBg">
