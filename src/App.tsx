@@ -1,16 +1,14 @@
-import React from 'react';
 import Home from './Pages/Home/Home';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Credit from './Pages/Home/Credit';
-import Register from './Pages/Register';
 import { useAuth } from '@clerk/clerk-react';
 // Import your Publishable Key
 
 
 function App(): JSX.Element {
 
-    const { getToken, isSignedIn } = useAuth();
+    const { getToken } = useAuth();
     console.log(getToken);
     
 

@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Options from '../options/Options';
-import Buttons from '../Buttons/Buttons';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from "../../Redux/store";
 import { marked } from 'marked';
 import Loading from '../Loading/Loading';
-import { handleInputs, handleSideBar } from '../../Redux/chatbotSlice';
-import Register from '../../Pages/Register';
+import { handleInputs } from '../../Redux/chatbotSlice';
 
 type mainPropes = {
   handilFetchApi: () => void
@@ -18,7 +15,7 @@ type mainPropes = {
 function Main({ handleKeyDown, handilFetchApi,setCharOrImg, charOrImg }: mainPropes) {
   const { data, loading, chatInput, mainShow, input } = useSelector((state: RootState) => state.chatRes);
     // local image loading state (so spinner shows until image finishes downloading)
-  const [imgLoaded, setImgLoaded] = useState(false);
+  // const [imgLoaded, setImgLoaded] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -140,8 +137,6 @@ return (
                   src={data.image}
                   alt="AI generated"
                   className={`max-h-[400px] rounded-lg shadow-md transition-opacity duration-500 `}
-                   onLoad={() => setImgLoaded(true)}
-                    onError={() => setImgLoaded(true)}
                 />
               </div>
             )}

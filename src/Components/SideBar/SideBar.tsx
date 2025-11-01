@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addManinShowToTrue, handleSideBar } from '../../Redux/chatbotSlice';
 import { AppDispatch, RootState } from '../../Redux/store';
 import Buttons from '../Buttons/Buttons';
-import { Gem, Moon, SunMoon, Trash, User } from 'lucide-react';
+import { Gem, SunMoon, Trash } from 'lucide-react';
 import ThemeProvider from '../ThemeProvider/ThemeProvider';
 import { Link } from 'react-router-dom';
 import Register from '../../Pages/Register';
@@ -22,7 +21,7 @@ type sideBarTy = {
 
 const SideBar = React.memo(({ handileDeleteHistory,ChatHistoryById }: sideBarTy) => {
   
-    const [clickValue, setClickValue] = useState<number>(0)
+    // const [clickValue, setClickValue] = useState<number>(0)
 
     const { chatHistory, sideBar,credit } = useSelector((state: RootState) => state.chatRes);
 
@@ -159,13 +158,9 @@ const SideBar = React.memo(({ handileDeleteHistory,ChatHistoryById }: sideBarTy)
                       ChatHistoryById(item._id);
                     }
                   }}
-                className={`flex items-center justify-between p-3 mt-3 rounded-md 
+                className={`flex items-center justify-between p-3 mt-3 rounded-md
                   border themeBorder themeBG text-sm font-medium cursor-pointer transition-colors
-                  ${
-                    clickValue === item._id
-                      ? "bg-dark-muted/30 themeText"
-                      : "themeText hover:bg-dark-muted/20"
-                  }`}
+                  themeText hover:bg-dark-muted/20`}
               >
                 <span
                   // onClick={() => handilPreviousToMail(item._id)}

@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { SignedIn, SignedOut, SignInButton, SignOutButton, UserButton, useUser } from '@clerk/clerk-react';
+import { useState } from 'react'
+import { SignedIn, SignedOut, SignInButton, SignOutButton, useUser } from '@clerk/clerk-react';
 import { LogIn, LogOut } from 'lucide-react';
 
 function Register() {

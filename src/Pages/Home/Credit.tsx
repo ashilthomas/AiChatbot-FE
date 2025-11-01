@@ -89,7 +89,7 @@ const Credit: React.FC = () => {
   ];
   // For local development, provide a hint in error stack only when actually used
   // ✅ Payment handler
-const paymentHandler = async (amount: number, planId: string) => {
+const paymentHandler = async (planId: string) => {
   try {
     const token = await getToken();
 
@@ -208,7 +208,7 @@ console.log(order);
 
             {/* Button */}
             <button
-              onClick={()=>paymentHandler(parseInt(plan.price), plan.planId!)}
+              onClick={()=>paymentHandler(plan.planId!)}
               className={`mt-8 py-3 rounded-xl font-semibold transition-colors ${
                 plan.highlighted
                   ? "bg-[var(--color-dark-accent)] text-black hover:bg-[var(--color-dark-accent2)]"
